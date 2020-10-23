@@ -14,6 +14,10 @@ public class Genres {
 	@JsonProperty("id")
 	private Integer idGenre;
 	
+	public Genres() {
+		super();
+	}
+
 	@JsonProperty("name")
 	private String genreName;
 
