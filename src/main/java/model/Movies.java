@@ -4,8 +4,8 @@
 package model;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -16,12 +16,9 @@ public class Movies extends Entertainment {
 
 	@JsonProperty("id")
 	private Integer idMovie;
-
+	
 	@JsonProperty("title")
 	private String title;
-
-	@JsonProperty("crew")
-	private ArrayList<Crew> crewList;
 
 	private String director;
 
@@ -56,19 +53,11 @@ public class Movies extends Entertainment {
 	}
 
 	public String getUriBackImage() {
-		return UriBackImage;
+		return this.UriBackImage;
 	}
 
 	public void setUriBackImage(String uriBackImage) {
-		UriBackImage += uriBackImage;
-	}
-
-	public ArrayList<Crew> getCrewList() {
-		return crewList;
-	}
-
-	public void setCrewList(ArrayList<Crew> crewList) {
-		this.crewList = crewList;
+		this.UriBackImage += uriBackImage;
 	}
 
 	public Date getReleaseDate() {
@@ -77,6 +66,12 @@ public class Movies extends Entertainment {
 
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Movies [idMovie=" + idMovie + ", title=" + title + ",  director=" + director
+				+ ", UriBackImage=" + UriBackImage + ", releaseDate=" + releaseDate + "]";
 	}
 
 }
