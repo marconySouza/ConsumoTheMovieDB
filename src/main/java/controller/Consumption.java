@@ -39,8 +39,8 @@ public class Consumption {
 
 		// getGenreJSON();
 		// getDirectorJSON(2);
-		//getMoviesJSON();
-		getTVShowsJSON();
+		// getMoviesJSON();
+		// getTVShowsJSON();
 	}
 
 	public static void getGenreJSON() throws UnirestException, JsonParseException, JsonMappingException, IOException {
@@ -61,60 +61,58 @@ public class Consumption {
 
 	}
 
-	public static void getMoviesJSON() throws UnirestException, JsonParseException, JsonMappingException, IOException {
+	public static void getMoviesJSON(int movieNumber)
+			throws UnirestException, JsonParseException, JsonMappingException, IOException {
 
-		int movieNumber = 2;
 		Movies result;
 		ObjectMapper mapper = new ObjectMapper();
 		HttpResponse<String> response;
-		for (int i = 0; i < 100; i++) {
 
-			Unirest.setTimeouts(0, 0);
-			response = Unirest
-					.get("https://api.themoviedb.org/3/movie/" + movieNumber + "?api_key=" + apiKey + "&language=pt-BR")
-					.asString();
-			
-			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		Unirest.setTimeouts(0, 0);
+		response = Unirest
+				.get("https://api.themoviedb.org/3/movie/" + movieNumber + "?api_key=" + apiKey + "&language=pt-BR")
+				.asString();
 
-			result = mapper.readValue(response.getBody(), Movies.class);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			if (result.getIdMovie() != null) {
-	
-				result.setDirector(getDirectorJSON(result.getIdMovie()));
-				
-				System.out.println("idMovie: " + result.getIdMovie() + "\nOriginalLanguage: " + result. getOriginalLanguage()
-				+ "\nOverview: " + result.getOverview() + "\nReleaseDate: " + result.getReleaseDate() 
-				+ "\nTitle: " + result.getTitle() + "\nUriBack: " + result.getUriBackImage() + "\nUriFront: " + result.getUriFrontImage() + "\nDirector: " + result.getDirector() +"\n ========== END ==============");
-			}
-			
-			movieNumber++;
+		result = mapper.readValue(response.getBody(), Movies.class);
+
+		if (result.getIdMovie() != null) {
+
+			result.setDirector(getDirectorJSON(result.getIdMovie()));
+
+			System.out.println("idMovie: " + result.getIdMovie() + "\nOriginalLanguage: " + result.getOriginalLanguage()
+					+ "\nOverview: " + result.getOverview() + "\nReleaseDate: " + result.getReleaseDate() + "\nTitle: "
+					+ result.getTitle() + "\nUriBack: " + result.getUriBackImage() + "\nUriFront: "
+					+ result.getUriFrontImage() + "\nDirector: " + result.getDirector()
+					+ "\n ========== END ==============");
 		}
+
 	}
 
-	public static void getTVShowsJSON() throws UnirestException, JsonParseException, JsonMappingException, IOException {
-		int tvNumber = 1;
+	public static void getTVShowsJSON(int tvNumber)
+			throws UnirestException, JsonParseException, JsonMappingException, IOException {
 		TVShows result;
 		ObjectMapper mapper = new ObjectMapper();
 		HttpResponse<String> response;
-		for (int i = 0; i < 100; i++) {
 
-			Unirest.setTimeouts(0, 0);
-			response = Unirest
-					.get("https://api.themoviedb.org/3/tv/"+tvNumber+"?api_key=73f8742e7eae9af2fcd6ac7768261fbe&language=pt-BR")
-					.asString();
-			
-			mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		Unirest.setTimeouts(0, 0);
+		response = Unirest.get("https://api.themoviedb.org/3/tv/" + tvNumber
+				+ "?api_key=73f8742e7eae9af2fcd6ac7768261fbe&language=pt-BR").asString();
 
-			result = mapper.readValue(response.getBody(), TVShows.class);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-			if (result.getIdTvShow() != null) {
-		
-				System.out.println("idTVShow: " + result.getIdTvShow() + "\nOriginalLanguage: " + result. getOriginalLanguage()
-				+ "\nOverview: " + result.getOverview() +  "\nTitle: " + result.getTitle() + "\nUriFront: " + result.getUriFrontImage()+ "\n ========== END ==============");
-			}
-			
-			tvNumber++;
+		result = mapper.readValue(response.getBody(), TVShows.class);
+
+		if (result.getIdTvShow() != null) {
+
+			System.out
+					.println("idTVShow: " + result.getIdTvShow() + "\nOriginalLanguage: " + result.getOriginalLanguage()
+							+ "\nOverview: " + result.getOverview() + "\nTitle: " + result.getTitle() + "\nUriFront: "
+							+ result.getUriFrontImage() + "\n ========== END ==============");
 		}
+
+		tvNumber++;
 	}
 
 	public static String getDirectorJSON(Integer idMovie)
@@ -129,12 +127,12 @@ public class Consumption {
 
 		CrewRequest crew = mapper.readValue(response.getBody(), CrewRequest.class);
 
-		if(crew.getCrewList() != null) {
-		for (int i = 0; i < crew.getCrewList().size(); i++) {
-			if (crew.getCrewList().get(i).getJob().equalsIgnoreCase("director")) {
-			return crew.getCrewList().get(i).getName();
+		if (crew.getCrewList() != null) {
+			for (int i = 0; i < crew.getCrewList().size(); i++) {
+				if (crew.getCrewList().get(i).getJob().equalsIgnoreCase("director")) {
+					return crew.getCrewList().get(i).getName();
+				}
 			}
-		}
 		}
 
 		return null;
