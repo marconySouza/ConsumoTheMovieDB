@@ -17,9 +17,9 @@ public class DBConnection {
 	static {
 		try {
 			// Driver do banco a ser utilizado
-			Class.forName("org.hsqldb.jdbc.JDBCDriver");
+			Class.forName("org.postgresql.Driver");
 			// Iniciando uma conexão com as informações do banco de dados
-			connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/db", "SA", "netfound.123");
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/netfound/netfoundServer/netfoundDB", "postgres", "netfound123");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
