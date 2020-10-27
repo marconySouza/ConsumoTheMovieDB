@@ -4,6 +4,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -27,6 +28,9 @@ public class TVShows extends Entertainment{
 	
 	@JsonProperty("first_air_date")
 	private Date releaseDate;
+	
+	@JsonProperty("genres")
+	private List<Genres> genres;
 
 	public Integer getIdTvShow() {
 		return idTvShow;
@@ -58,6 +62,22 @@ public class TVShows extends Entertainment{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public List<Genres> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genres> genres) {
+		this.genres = genres;
+	}
+
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 	
 }

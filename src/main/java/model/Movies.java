@@ -4,8 +4,8 @@
 package model;
 
 import java.sql.Date;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -27,6 +27,8 @@ public class Movies extends Entertainment {
 
 	@JsonProperty("release_date")
 	private Date releaseDate;
+	
+	private List<Genres> genres;
 
 	public Integer getIdMovie() {
 		return idMovie;
@@ -72,6 +74,14 @@ public class Movies extends Entertainment {
 	public String toString() {
 		return "Movies [idMovie=" + idMovie + ", title=" + title + ",  director=" + director
 				+ ", UriBackImage=" + UriBackImage + ", releaseDate=" + releaseDate + "]";
+	}
+
+	public List<Genres> getGenres() {
+		return genres;
+	}
+
+	public void setGenres(List<Genres> genres) {
+		this.genres = genres;
 	}
 
 }
