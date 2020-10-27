@@ -28,6 +28,7 @@ public class Movies extends Entertainment {
 	@JsonProperty("release_date")
 	private Date releaseDate;
 	
+	@JsonProperty("genres")
 	private List<Genres> genres;
 
 	public Integer getIdMovie() {
