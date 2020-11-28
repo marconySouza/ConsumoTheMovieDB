@@ -1,7 +1,7 @@
 /**
  * @author marcony.souza
  */
-package model;
+package br.netfound.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,7 +15,7 @@ public class Entertainment {
 	private String overview;
 
 	@JsonProperty("poster_path")
-	private String uriFrontImage = "https://image.tmdb.org/t/p/original";
+	private String uriFrontImage;
 
 	@JsonProperty("original_language")
 	private String originalLanguage;
@@ -33,7 +33,7 @@ public class Entertainment {
 	}
 
 	public void setUriFrontImage(String uriFrontImage) {
-		this.uriFrontImage += uriFrontImage;
+		this.uriFrontImage = uriFrontImage;
 	}
 
 	public String getOriginalLanguage() {

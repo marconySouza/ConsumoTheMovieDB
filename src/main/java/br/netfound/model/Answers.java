@@ -1,7 +1,7 @@
 /**
  * @author marcony.souza
  */
-package model;
+package br.netfound.model;
 
 import java.sql.Date;
 
@@ -11,7 +11,7 @@ import java.sql.Date;
  */
 public class Answers {
 	
-	private Genres idGenre;
+	private Integer idGenre;
 	
 	private Date beginDateInterval;
 	
@@ -19,16 +19,6 @@ public class Answers {
 	
 	private String director;
 	
-	private Boolean isFilme;
-
-	public Genres getIdGenre() {
-		return idGenre;
-	}
-
-	public void setIdGenre(Genres idGenre) {
-		this.idGenre = idGenre;
-	}
-
 	public Date getBeginDateInterval() {
 		return beginDateInterval;
 	}
@@ -53,12 +43,12 @@ public class Answers {
 		this.director = director;
 	}
 
-	public Boolean getIsFilme() {
-		return isFilme;
+	public Integer getIdGenre() {
+		return idGenre;
 	}
 
-	public void setIsFilme(Boolean isFilme) {
-		this.isFilme = isFilme;
+	public void setIdGenre(Integer idGenre) {
+		this.idGenre = idGenre;
 	}
 
 }

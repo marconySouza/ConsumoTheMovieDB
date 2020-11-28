@@ -1,7 +1,7 @@
 /**
  * @author marcony.souza
  */
-package database;
+package br.netfound.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,8 +18,8 @@ public class DBConnection {
 		try {
 			// Driver do banco a ser utilizado
 			Class.forName("org.postgresql.Driver");
-			// Iniciando uma conexão com as informações do banco de dados
-			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/netfound/netfoundServer/netfoundDB", "postgres", "netfound123");
+			// Iniciando uma conexï¿½o com as informaï¿½ï¿½es do banco de dados
+			connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/netfoundDB", "postgres", "netfound123");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

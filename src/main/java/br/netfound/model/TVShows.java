@@ -1,7 +1,7 @@
 /**
  * @author marcony.souza
  */
-package model;
+package br.netfound.model;
 
 import java.sql.Date;
 import java.util.List;

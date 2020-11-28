@@ -1,7 +1,7 @@
 /**
  * @author marcony.souza
  */
-package model;
+package br.netfound.model;
 
 import java.sql.Date;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Movies extends Entertainment {
 	private String director;
 
 	@JsonProperty("backdrop_path")
-	private String UriBackImage = "https://image.tmdb.org/t/p/original";
+	private String uriBackImage;
 
 	@JsonProperty("release_date")
 	private Date releaseDate;
@@ -55,14 +55,6 @@ public class Movies extends Entertainment {
 		this.director = director;
 	}
 
-	public String getUriBackImage() {
-		return this.UriBackImage;
-	}
-
-	public void setUriBackImage(String uriBackImage) {
-		this.UriBackImage += uriBackImage;
-	}
-
 	public Date getReleaseDate() {
 		return releaseDate;
 	}
@@ -74,7 +66,7 @@ public class Movies extends Entertainment {
 	@Override
 	public String toString() {
 		return "Movies [idMovie=" + idMovie + ", title=" + title + ",  director=" + director
-				+ ", UriBackImage=" + UriBackImage + ", releaseDate=" + releaseDate + "]";
+				+ ", UriBackImage=" + uriBackImage + ", releaseDate=" + releaseDate + "]";
 	}
 
 	public List<Genres> getGenres() {
@@ -83,6 +75,14 @@ public class Movies extends Entertainment {
 
 	public void setGenres(List<Genres> genres) {
 		this.genres = genres;
+	}
+
+	public String getUriBackImage() {
+		return uriBackImage;
+	}
+
+	public void setUriBackImage(String uriBackImage) {
+		this.uriBackImage =  uriBackImage;
 	}
 
 }

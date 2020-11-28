@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model;
+package br.netfound.model;
 
 import java.util.ArrayList;
 

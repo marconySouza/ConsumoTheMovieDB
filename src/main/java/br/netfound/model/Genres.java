@@ -1,7 +1,7 @@
 /**
  * @author marcony.souza
  */
-package model;
+package br.netfound.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
