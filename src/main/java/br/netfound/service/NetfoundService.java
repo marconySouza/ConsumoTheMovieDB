@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.netfound.model.Answers;
+import br.netfound.model.Genres;
+import br.netfound.persistence.GenreDAO;
 import br.netfound.persistence.MoviesDAO;
 import br.netfound.persistence.TVShowDAO;
 import br.netfound.persistence.UserDAO;
@@ -72,6 +74,18 @@ public class NetfoundService {
 		return ResponseEntity.ok(dao.getDirectors());
 	}
 
+	/**
+	 * marcony.souza
+	 * @throws Exception 
+	 * 
+	 */
+	@GetMapping("/genres")
+	public ResponseEntity<List<Genres>> getGenres() throws Exception {
+		GenreDAO dao = new GenreDAO();
+
+		return ResponseEntity.ok(dao.listGenres());
+	}
+	
 	@PostMapping("/save-my-list")
 	public String saveInMyList(@RequestParam String idEntertainment, @RequestParam String idUser,
 			@RequestParam String type) throws SQLException {
