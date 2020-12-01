@@ -10,22 +10,23 @@ DEPENDENCIAS:
 
 OS SERVIÇOS(URLS) E SCHEMAS QUE SÃO DISPONIBILIZADOS VIA API:
 
-//serviço para login de users
-localhost:9090/services/sign-in 
+serviço para login de users
+* localhost:9090/services/sign-in 
 
 TYPE: POST
 
-BODY:
-String username
-String password
+BODY
+- String username
+- String password
 
 -------------------------------------
-//serviço para consulta de todos os diretores(botar os diretores em um combobox na hora de responder as perguntas)
-localhost:9090/services/directors
+serviço para consulta de todos os diretores(botar os diretores em um combobox na hora de responder as perguntas)
+* localhost:9090/services/directors
 
 TYPE: GET
 
-SCHEMA:
+SCHEMA
+
 [
     "Alexander Payne",
     "Nando Cicero",
@@ -35,12 +36,12 @@ SCHEMA:
 
 RETURN: LIST<STRING>
 --------------------------
-//serviço para consulta de todos os generos(botar os generos em um combobox na hora de responder as perguntas)
-localhost:9090/services/genres
+serviço para consulta de todos os generos(botar os generos em um combobox na hora de responder as perguntas)
+* localhost:9090/services/genres
 
 TYPE: GET
 
-SCHEMA: 
+SCHEMA 
 
 [
     {
@@ -55,12 +56,12 @@ SCHEMA:
 
 RETURN: LIST<GENRES>
 ----------------------------
-//Consultar lista de filmes e séries salvas
-localhost:9090/services/my-list
+Consultar lista de filmes e séries salvas
+* localhost:9090/services/my-list
 
 TYPE: GET
 
-SCHEMA:
+SCHEMA
 
 {
     "MOVIES": [
@@ -110,23 +111,23 @@ SCHEMA:
     ]
 }
 
-BODY:
-String idUser
+BODY
+- String idUser
 
 RETURN: MAP<STRING, LIST<?>> (LISTA DE FILMES E SÉRIES SEPARADAS, CADA TIPO EM SUA DEVIDA LISTA)
 -----------------------------------------
-//Salva filmes ou séries na lista de salvos do usuario
-localhost:9090/services/save-my-list
+Salva filmes ou séries na lista de salvos do usuario
+* localhost:9090/services/save-my-list
 
 TYPE: POST
 
-BODY:
-String idEntertainment(serie ou filme) 
-String idUser
-String type (passar nessa string os valores 'filme' ou 'serie' para cadastro dos dados nas listas corretas)
+BODY
+- String idEntertainment(serie ou filme) 
+- String idUser
+- String type (passar nessa string os valores 'filme' ou 'serie' para cadastro dos dados nas listas corretas)
 ------------------------------
-//Envia uma sugestão de filme ou série baseada nas respostas das perguntas dos usuarios
-localhost:9090/services/sugestion
+Envia uma sugestão de filme ou série baseada nas respostas das perguntas dos usuarios
+* localhost:9090/services/sugestion
 
 TYPE: GET
 
@@ -182,42 +183,41 @@ SCHEMA:
         ]
     }
 
-BODY:
-String idGenre(id dos generos(combobox))
-String director(nome do diretor(combobox))
-Date beginDate(intervalo inicial de lançamento, imprescindivel que esse parametro seja passado da seguinte maneira -> 2020-12-01 (ANO/MÊS/DIA))
-Date endDate(intervalo final de lançamento, imprescindivel que esse parametro seja passado da seguinte maneira -> 2020-12-01 (ANO/MÊS/DIA))
-String type('filme' ou 'serie')
+BODY
+- String idGenre(id dos generos(combobox))
+- String director(nome do diretor(combobox))
+- Date beginDate(intervalo inicial de lançamento, imprescindivel que esse parametro seja passado da seguinte maneira -> 2020-12-01 (ANO/MÊS/DIA))
+- Date endDate(intervalo final de lançamento, imprescindivel que esse parametro seja passado da seguinte maneira -> 2020-12-01 (ANO/MÊS/DIA))
+- String type('filme' ou 'serie')
 
 RETURN LIST<?>
 ----------------------------
-//serviço para criação de users
-localhost:9090/services/create-user 
+serviço para criação de users
+* localhost:9090/services/create-user 
 
 TYPE: POST
 
-BODY:
-String username
-String password
+BODY
+- String username
+- String password
 
-//serviço para alteração de users
-localhost:9090/services/create-user 
+serviço para alteração de users
+* localhost:9090/services/create-user 
 
 TYPE: POST
 
-BODY:
-String idUser
-String username
-String password
+BODY
+- String idUser
+- String username
+- String password
 
 
-======================================== DATABASE =========================================== 
-O ARQUIVO BACKUP DO BANCO DE DADOS COM TODOS OS FILMES E SERIES JÁ POVOADOS ESTÁ DENTRO DA PASTA RESOURCES NO PROJETO
+------------------------ DATABASE ------------------------ 
+- O ARQUIVO BACKUP DO BANCO DE DADOS COM TODOS OS FILMES E SERIES JÁ POVOADOS ESTÁ DENTRO DA PASTA RESOURCES NO PROJETO
 
-CASO NÃO SAIBAM IMPORTAR UM BANCO DE DADOS PRO POSTGRESQL, TEM VARIOS VIDEOS NO YOUTUBE ENSINANDO, O PROCESSO É SIMPLÓRIO.
+- CASO NÃO SAIBAM IMPORTAR UM BANCO DE DADOS PRO POSTGRESQL, TEM VARIOS VIDEOS NO YOUTUBE ENSINANDO, O PROCESSO É SIMPLÓRIO.
 
-NECESSÁRIO SE ATENTAR A CLASSE "DBCONNECTION" POIS LÁ QUE ESTÁ OS DADOS DE CONEXÃO AO BANCO DE DADOS, SE HOUVER NECESSIDADE DE MUDANÇA DE ALGUM DADO DE CONEXÃO, SERÁ POR LÁ QUE HAVERÁ A MUDANÇA. 
+- NECESSÁRIO SE ATENTAR A CLASSE "DBCONNECTION" POIS LÁ QUE ESTÁ OS DADOS DE CONEXÃO AO BANCO DE DADOS, SE HOUVER NECESSIDADE DE MUDANÇA DE ALGUM DADO DE CONEXÃO, SERÁ POR LÁ QUE HAVERÁ A MUDANÇA. 
 
-====================================== APLICAÇÃO .JAR ====================================== 
-
-JUNTO DO BANCO DE DADOS DENTRO DA PASTA RESOURCES CONTEM O ARQUIVO .JAR DA APLICAÇÃO TOTALMENTE FUNCIONAL, BASTA APENAS INSTALAR O BANCO DE DADOS NA SUA MAQUINA, ABRIR A CONEXÃO DO BANCO DE DADOS E RODAR A APLICAÇÃO. A APLICAÇÃO ESTÁ SUBINDO EM UM SERVIDOR TOMCAT EMBUTIDO QUE ESTÁ REDIRECIONADO PARA A PORTA 9090, CASO A PORTA JÁ ESTEJA EM USO, UTILIZE O COMANDO 'java -jar -Dserver.port=8080 netfoundAPI.jar'(CMD) DENTRO DA PASTA QUE SE ENCONTRA A APLICAÇÃO.  
+------------------------ APLICAÇÃO .JAR ------------------------
+- JUNTO DO BANCO DE DADOS, DENTRO DA PASTA RESOURCES CONTEM O ARQUIVO .JAR DA APLICAÇÃO TOTALMENTE FUNCIONAL, BASTA APENAS INSTALAR O BANCO DE DADOS NA SUA MAQUINA, ABRIR A CONEXÃO DO BANCO DE DADOS E RODAR A APLICAÇÃO. A APLICAÇÃO ESTÁ SUBINDO EM UM SERVIDOR TOMCAT EMBUTIDO QUE ESTÁ REDIRECIONADO PARA A PORTA 9090, CASO A PORTA JÁ ESTEJA EM USO, UTILIZE O COMANDO 'java -jar -Dserver.port=8080 netfoundAPI.jar'(CMD) DENTRO DA PASTA QUE SE ENCONTRA A APLICAÇÃO.  
