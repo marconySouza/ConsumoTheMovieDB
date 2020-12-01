@@ -31,6 +31,9 @@ public class TVShows extends Entertainment{
 	
 	@JsonProperty("genres")
 	private List<Genres> genres;
+	
+	@JsonProperty("popularity")
+	private double popularity;
 
 	public Integer getIdTvShow() {
 		return idTvShow;
@@ -78,6 +81,14 @@ public class TVShows extends Entertainment{
 
 	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
+	}
+
+	public double getPopularity() {
+		return popularity;
+	}
+
+	public void setPopularity(double popularity) {
+		this.popularity = popularity;
 	}
 	
 }

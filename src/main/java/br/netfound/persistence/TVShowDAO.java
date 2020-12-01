@@ -28,16 +28,16 @@ public class TVShowDAO {
 			String title = tvShow.getTitle().replaceAll("'", "");
 			String overview = tvShow.getOverview().replaceAll("'", "");
 			
-			String query = "INSERT INTO TV_SHOWS (ID_TV_SHOW, TITLE, OVERVIEW, RELEASE_DATE, QUANTITY_SEASONS, QUANTITY_EPISODES, ORIGINAL_LANGUAGE, URI_FRONT_IMAGE) values ("
+			String query = "INSERT INTO TV_SHOWS (ID_TV_SHOW, TITLE, OVERVIEW, RELEASE_DATE, QUANTITY_SEASONS, QUANTITY_EPISODES, ORIGINAL_LANGUAGE, URI_FRONT_IMAGE, popularity) values ("
 					+ tvShow.getIdTvShow() + ", '" + title + "', '" + overview + "', '"
 					+ tvShow.getReleaseDate() + "', " + tvShow.getSeasonsQuantity() + ", "
 					+ tvShow.getEpisodesQuantity() + ", '" + tvShow.getOriginalLanguage() + "', '"
-					+ tvShow.getUriFrontImage() + "')";
+					+ tvShow.getUriFrontImage() + "', "+tvShow.getPopularity()+")";
 			stm.execute(query);
 			dao.addTvShowGenres(tvShow);
 
 		} catch (SQLException e) {
-			con.rollback();
+		//	con.rollback();
 			e.printStackTrace();
 		}
 	}
@@ -48,14 +48,14 @@ public class TVShowDAO {
 		Statement stm = con.createStatement();
 		GenreDAO dao = new GenreDAO();
 		try {
-			String query = "select TV_SHOW.ID_TV_SHOW, TV_SHOW.URI_FRONT_IMAGE, TV_SHOW.TITLE, TV_SHOW.OVERVIEW, TV_SHOW.ORIGINAL_LANGUAGE, TV_SHOW.RELEASE_DATE, TV_SHOW.QUANTITY_SEASONS, TV_SHOW.QUANTITY_EPISODES  from TV_SHOWS as TV_SHOW "
+			String query = "select distinct(TV_SHOW.ID_TV_SHOW), TV_SHOW.URI_FRONT_IMAGE, TV_SHOW.TITLE, TV_SHOW.OVERVIEW, TV_SHOW.ORIGINAL_LANGUAGE, TV_SHOW.RELEASE_DATE, TV_SHOW.QUANTITY_SEASONS, TV_SHOW.QUANTITY_EPISODES  from TV_SHOWS as TV_SHOW "
 					+ "inner join tv_show_genre as tv_show_genre on (tv_show_genre.id_tv_show = tv_show.id_tv_show) "
 					+ "where 1 = 1 and tv_show.release_date between '" + answers.getBeginDateInterval() + "' and '"
 					+ answers.getEndDateInterval() + "' ";
 			if (answers.getIdGenre() != 0)
 				query += "and tv_show_genre.id_genre = " + answers.getIdGenre();
 
-			query += " order by release_date desc";
+			query += " order by popularity desc";
 			ResultSet rs = stm.executeQuery(query);
 
 			while (rs.next()) {

@@ -137,7 +137,7 @@ public class GenreDAO {
 			}
 
 		} catch (SQLException e) {
-			con.rollback();
+			//con.rollback();
 			e.printStackTrace();
 		}
 	}
