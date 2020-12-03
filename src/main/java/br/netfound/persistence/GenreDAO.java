@@ -26,7 +26,7 @@ public class GenreDAO {
 		Connection con = DBConnection.getConnection();
 		Statement stm = con.createStatement();
 		try {
-			String query = "SELECT movie_genre.ID_GENRE, GENRE.GENRE_NAME FROM movie_genre "
+			String query = "SELECT distinct(movie_genre.ID_GENRE), GENRE.GENRE_NAME FROM movie_genre "
 					+ "inner join genre on (genre.id_genre = movie_genre.id_genre) "
 					+ "inner join movies as movie on (movie.id_movie = movie_genre.id_movie) where movie_genre.id_movie = "
 					+ idMovie;
@@ -49,7 +49,7 @@ public class GenreDAO {
 		Connection con = DBConnection.getConnection();
 		Statement stm = con.createStatement();
 		try {
-			String query = "SELECT tv_show_genre.id_genre, GENRE.GENRE_NAME FROM tv_show_genre "
+			String query = "SELECT distinct(tv_show_genre.id_genre), GENRE.GENRE_NAME FROM tv_show_genre "
 					+ "inner join genre on (genre.id_genre = tv_show_genre.id_genre) "
 					+ "inner join tv_shows as tv_shows on (tv_shows.id_tv_show = tv_show_genre.id_tv_show) where tv_show_genre.id_tv_show = "
 					+ idTvShow;
