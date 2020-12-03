@@ -71,7 +71,7 @@ public class MoviesDAO {
 		Statement stm = con.createStatement();
 		GenreDAO dao = new GenreDAO();
 		try {
-			String query = "select distinct(MOVIE.ID_MOVIE), MOVIE.URI_FRONT_IMAGE, MOVIE.URI_BACK_IMAGE, MOVIE.TITLE, MOVIE.OVERVIEW, MOVIE.ORIGINAL_LANGUAGE, MOVIE.RELEASE_DATE, MOVIE.DIRECTOR from MOVIES as MOVIE "
+			String query = "select distinct(MOVIE.ID_MOVIE), MOVIE.POPULARITY, MOVIE.URI_FRONT_IMAGE, MOVIE.URI_BACK_IMAGE, MOVIE.TITLE, MOVIE.OVERVIEW, MOVIE.ORIGINAL_LANGUAGE, MOVIE.RELEASE_DATE, MOVIE.DIRECTOR from MOVIES as MOVIE "
 					+ "inner join movie_genre as movie_genre on (movie_genre.id_movie = movie.id_movie) "
 					+ "where 1 = 1 and movie.release_date between '" + answers.getBeginDateInterval() + "' and '"
 					+ answers.getEndDateInterval() + "' ";
