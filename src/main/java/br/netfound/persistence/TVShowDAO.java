@@ -48,7 +48,7 @@ public class TVShowDAO {
 		Statement stm = con.createStatement();
 		GenreDAO dao = new GenreDAO();
 		try {
-			String query = "select distinct(TV_SHOW.ID_TV_SHOW), TV_SHOW.URI_FRONT_IMAGE, TV_SHOW.TITLE, TV_SHOW.OVERVIEW, TV_SHOW.ORIGINAL_LANGUAGE, TV_SHOW.RELEASE_DATE, TV_SHOW.QUANTITY_SEASONS, TV_SHOW.QUANTITY_EPISODES  from TV_SHOWS as TV_SHOW "
+			String query = "select distinct(TV_SHOW.ID_TV_SHOW), TV_SHOW.POPULARITY, TV_SHOW.URI_FRONT_IMAGE, TV_SHOW.TITLE, TV_SHOW.OVERVIEW, TV_SHOW.ORIGINAL_LANGUAGE, TV_SHOW.RELEASE_DATE, TV_SHOW.QUANTITY_SEASONS, TV_SHOW.QUANTITY_EPISODES  from TV_SHOWS as TV_SHOW "
 					+ "inner join tv_show_genre as tv_show_genre on (tv_show_genre.id_tv_show = tv_show.id_tv_show) "
 					+ "where 1 = 1 and tv_show.release_date between '" + answers.getBeginDateInterval() + "' and '"
 					+ answers.getEndDateInterval() + "' ";
