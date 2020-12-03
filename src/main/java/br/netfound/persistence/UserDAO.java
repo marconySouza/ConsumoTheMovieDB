@@ -133,7 +133,7 @@ public class UserDAO {
 					+ "where saved_tv.id_user = " + idUser;
 
 			ResultSet rs = stm.executeQuery(query);
-			if (rs.next()) {
+			while (rs.next()) {
 				TVShows tvShow = new TVShows();
 				tvShow.setIdTvShow(rs.getInt("ID_TV_SHOW"));
 				tvShow.setOriginalLanguage(rs.getString("ORIGINAL_LANGUAGE"));
@@ -149,7 +149,7 @@ public class UserDAO {
 					+ "where saved_movies.id_user = " + idUser;
 			rs = stm.executeQuery(query);
 
-			if (rs.next()) {
+			while (rs.next()) {
 				Movies movie = new Movies();
 				movie.setIdMovie(rs.getInt("ID_MOVIE"));
 				movie.setOriginalLanguage(rs.getString("ORIGINAL_LANGUAGE"));
