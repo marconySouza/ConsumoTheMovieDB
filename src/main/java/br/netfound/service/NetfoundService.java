@@ -109,16 +109,9 @@ public class NetfoundService {
 	 * @throws Exception
 	 * 
 	 */
-	@GetMapping(value="/sugestion", produces={"application/json","application/xml"}, consumes="application/json")
-	public ResponseEntity<List<?>> getSugestion(@RequestBody String body) throws Exception {
+	@GetMapping(value="/sugestion", produces={"application/json","application/xml"})
+	public ResponseEntity<List<?>> getSugestion(@RequestParam("id_genre") String idGenre, @RequestParam String director, @RequestParam("begin_date") String beginDate, @RequestParam("end_date") String endDate, @RequestParam String type) throws Exception {
 
-		JSONObject json = new JSONObject(body);
-		String idGenre = json.getString("id_genre");
-		String director = json.getString("director");
-		String beginDate = json.getString("begin_date");
-		String endDate = json.getString("end_date");
-		String type = json.getString("type");
-		
 		Answers answers = new Answers();
 		answers.setBeginDateInterval(beginDate);
 		answers.setEndDateInterval(endDate);
