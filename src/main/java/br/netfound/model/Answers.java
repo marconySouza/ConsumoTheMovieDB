@@ -13,25 +13,25 @@ public class Answers {
 	
 	private Integer idGenre;
 	
-	private Date beginDateInterval;
+	private String beginDateInterval;
 	
-	private Date endDateInterval;
+	private String endDateInterval;
 	
 	private String director;
 	
-	public Date getBeginDateInterval() {
+	public String getBeginDateInterval() {
 		return beginDateInterval;
 	}
 
-	public void setBeginDateInterval(Date beginDateInterval) {
+	public void setBeginDateInterval(String beginDateInterval) {
 		this.beginDateInterval = beginDateInterval;
 	}
 
-	public Date getEndDateInterval() {
+	public String getEndDateInterval() {
 		return endDateInterval;
 	}
 
-	public void setEndDateInterval(Date endDateInterval) {
+	public void setEndDateInterval(String endDateInterval) {
 		this.endDateInterval = endDateInterval;
 	}
 
