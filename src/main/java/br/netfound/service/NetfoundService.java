@@ -3,17 +3,17 @@
  */
 package br.netfound.service;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.netfound.model.Answers;
@@ -37,10 +37,12 @@ public class NetfoundService {
 	 * @throws Exception
 	 * 
 	 */
-	@PostMapping("/sign-in")
-	public String signIn(@RequestParam String username, @RequestParam String password) throws Exception {
+	@PostMapping(value="/sign-in", produces={"application/json","application/xml"}, consumes="application/json")
+	public String signIn(@RequestBody String body) throws Exception {
 		String msg = "";
-
+		JSONObject json = new JSONObject(body);
+		String username = json.getString("username");
+		String password = json.getString("password");
 		if (validString(username, password)) {
 			UserDAO dao = new UserDAO();
 			boolean authentication = dao.authenticateUser(username, password);
@@ -56,10 +58,11 @@ public class NetfoundService {
 	 * @throws SQLException
 	 * 
 	 */
-	@GetMapping("/my-list")
-	public ResponseEntity<Map<String, List<?>>> getMyList(@RequestParam String idUser) throws SQLException {
+	@GetMapping(value="/my-list", produces={"application/json","application/xml"}, consumes="application/json")
+	public ResponseEntity<Map<String, List<?>>> getMyList(@RequestBody String body) throws SQLException {
+		JSONObject json = new JSONObject(body);
+		String idUser = json.getString("id_user");
 		UserDAO dao = new UserDAO();
-
 		return ResponseEntity.ok(dao.getMyList(idUser));
 	}
 
@@ -79,7 +82,7 @@ public class NetfoundService {
 	 * @throws Exception 
 	 * 
 	 */
-	@GetMapping("/genres")
+	@GetMapping(value="/genres", produces={"application/json","application/xml"}, consumes="application/json")
 	public ResponseEntity<List<Genres>> getGenres() throws Exception {
 		GenreDAO dao = new GenreDAO();
 
@@ -87,10 +90,12 @@ public class NetfoundService {
 	}
 	
 	@PostMapping("/save-my-list")
-	public String saveInMyList(@RequestParam String idEntertainment, @RequestParam String idUser,
-			@RequestParam String type) throws SQLException {
+	public String saveInMyList(@RequestBody String body) throws SQLException {
 		String msg = "";
-
+		JSONObject json = new JSONObject(body);
+		String idEntertainment = json.getString("id_entertainment");
+		String idUser = json.getString("id_user");
+		String type = json.getString("type");
 		UserDAO dao = new UserDAO();
 		boolean result = dao.saveInMyList(idEntertainment, idUser, type);
 		msg = result ? "Salvo com sucesso!" : "Erro ao salvar, tente novamente.";
@@ -104,10 +109,16 @@ public class NetfoundService {
 	 * @throws Exception
 	 * 
 	 */
-	@GetMapping("/sugestion")
-	public ResponseEntity<List<?>> getSugestion(@RequestParam String idGenre, @RequestParam String director,
-			@RequestParam Date beginDate, @RequestParam Date endDate, @RequestParam String type) throws Exception {
+	@GetMapping(value="/sugestion", produces={"application/json","application/xml"}, consumes="application/json")
+	public ResponseEntity<List<?>> getSugestion(@RequestBody String body) throws Exception {
 
+		JSONObject json = new JSONObject(body);
+		String idGenre = json.getString("id_genre");
+		String director = json.getString("director");
+		String beginDate = json.getString("begin_date");
+		String endDate = json.getString("end_date");
+		String type = json.getString("type");
+		
 		Answers answers = new Answers();
 		answers.setBeginDateInterval(beginDate);
 		answers.setEndDateInterval(endDate);
@@ -130,9 +141,12 @@ public class NetfoundService {
 	 * @throws Exception
 	 * 
 	 */
-	@PostMapping("/create-user")
-	public String createUser(@RequestParam String username, @RequestParam String password) throws Exception {
+	@PostMapping(value="/create-user", produces={"application/json","application/xml"}, consumes="application/json")
+	public String createUser(@RequestBody String body) throws Exception {
 		String msg = "";
+		JSONObject json = new JSONObject(body);
+		String username = json.getString("username");
+		String password = json.getString("password");
 		if (validString(username, password)) {
 
 			UserDAO dao = new UserDAO();
@@ -158,10 +172,15 @@ public class NetfoundService {
 	 * @throws Exception
 	 * 
 	 */
-	@PutMapping("/alter-user")
-	public String alterUser(@RequestParam String idUser, @RequestParam String username, @RequestParam String password)
+	@PutMapping(value="/alter-user", produces={"application/json","application/xml"}, consumes="application/json")
+	
+	public String alterUser(@RequestBody String body)
 			throws Exception {
 		String msg = "";
+		JSONObject json = new JSONObject(body);
+		String username = json.getString("username");
+		String password = json.getString("password");
+		String idUser = json.getString("id_user");
 		if (validString(username, password)) {
 
 			UserDAO dao = new UserDAO();
